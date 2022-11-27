@@ -19,7 +19,7 @@ $dark : rgb(40, 66, 52);
     object-fit: cover;
     pointer-events: none;
 }
-.App{
+.Main{
     width: 100vw;
     height: 100vh;
     max-height: 100vh;
@@ -321,7 +321,7 @@ $dark : rgb(40, 66, 52);
 
 // Tablet
 @media only screen and (max-width:868px) and (min-width:481px){
-    .App{
+    .Main{
         background-size: 250px;
     }
     .alertHolder{
@@ -398,7 +398,7 @@ $dark : rgb(40, 66, 52);
 
 // Smartphone
 @media only screen and (min-width: 320px) and (max-width: 480px){
-    .App{
+    .Main{
         background-size: 150px;
     }
     .alertHolder{
