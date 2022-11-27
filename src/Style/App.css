@@ -1,0 +1,407 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;500&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+#myVideo {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 100;
+  mix-blend-mode: color-dodge;
+  opacity: 40%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  pointer-events: none;
+}
+
+.App {
+  width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  justify-content: center;
+  background: url("../resources/greenbg.png");
+  background-size: 300px;
+  background-position: center;
+}
+
+.alertHolder {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  position: fixed;
+  z-index: 99;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0);
+}
+.alertHolder div {
+  width: 450px;
+  border: 1px solid #E4F9E1;
+  border-radius: 2px;
+  padding: 2rem 2rem;
+  background-image: linear-gradient(to right, rgba(54, 68, 50, 0.6588235294), rgba(38, 67, 35, 0.6588235294));
+  -webkit-backdrop-filter: blur(8px);
+          backdrop-filter: blur(8px);
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  opacity: 0;
+  transform: scale(95%);
+  transition: 0.2s ease;
+}
+.alertHolder div p {
+  font-family: "Source Code Pro", monospace;
+  font-weight: 300;
+  color: #E4F9E1;
+  font-size: 1.563rem;
+  text-align: center;
+}
+
+.alertHolder.success, .alertHolder.error {
+  pointer-events: all;
+  background-color: rgba(0, 0, 0, 0.258);
+}
+.alertHolder.success div, .alertHolder.error div {
+  opacity: 1;
+  transform: scale(100%);
+  transition: 0.2s ease;
+}
+
+.alertHolder.success div {
+  background-image: linear-gradient(to right, rgba(54, 68, 50, 0.6588235294), rgba(38, 67, 35, 0.6588235294));
+}
+
+.alertHolder.error div {
+  background-image: linear-gradient(to right, rgba(68, 50, 50, 0.6588235294), rgba(67, 35, 35, 0.6588235294));
+}
+
+.container {
+  height: 100%;
+  padding: 20px 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+.container > p {
+  position: relative;
+  z-index: 99;
+  font-family: "Source Code Pro", monospace;
+  font-weight: 300;
+  color: #E4F9E1;
+  justify-self: flex-end;
+}
+.container header h1 {
+  font-family: "Source Code Pro", monospace;
+  font-weight: 300;
+  color: #E4F9E1;
+  font-size: 3.052rem;
+}
+.container .controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2rem;
+  border: 1px solid #E4F9E1;
+  border-radius: 2px;
+  background-image: linear-gradient(to right, rgba(54, 68, 50, 0.6588235294), rgba(38, 67, 35, 0.6588235294));
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+}
+.container .controls .control1, .container .controls .control2, .container .controls .control3 {
+  width: clamp(165px, 16vw, 250px);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: space-between;
+}
+.container .controls .control1 input[type=checkbox], .container .controls .control2 input[type=checkbox], .container .controls .control3 input[type=checkbox] {
+  align-self: center;
+  justify-self: center;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background: rgba(40, 65, 37, 0.7333333333);
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  width: 1.15em;
+  height: 1.15em;
+  border: 1px solid #E4F9E1;
+  border-radius: 2px;
+  display: grid;
+  place-content: center;
+}
+.container .controls .control1 input[type=checkbox]::before, .container .controls .control2 input[type=checkbox]::before, .container .controls .control3 input[type=checkbox]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  background-color: #E4F9E1;
+}
+.container .controls .control1 input[type=checkbox]:checked::before, .container .controls .control2 input[type=checkbox]:checked::before, .container .controls .control3 input[type=checkbox]:checked::before {
+  transform: scale(1);
+}
+.container .controls .control1 {
+  justify-content: space-evenly;
+}
+.container .controls .control1 .length {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.container .controls .control1 .length h3 {
+  font-family: "Source Code Pro", monospace;
+  font-weight: 300;
+  color: #E4F9E1;
+  font-size: clamp(1.266rem, 2vw, 1.953rem);
+  align-self: center;
+}
+.container .controls .control1 .length input {
+  width: clamp(5rem, 40%, 4rem);
+  outline: none;
+  border: 1px solid #E4F9E1;
+  border-radius: 3px;
+  background: rgba(40, 65, 37, 0.7333333333);
+  padding: 0.5rem 0.7rem;
+  font-family: "Source Code Pro", monospace;
+  font-weight: 300;
+  color: #E4F9E1;
+}
+.container .controls .control1 #lenSlider {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  width: 100%;
+  height: 2px;
+  position: relative;
+  background: #E4F9E1;
+  outline: none;
+  border-radius: 2px;
+  transition: opacity 0.2s;
+}
+.container .controls .control1 #lenSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 100%;
+  background: #E4F9E1;
+  cursor: pointer;
+}
+.container .controls .control1 #lenSlider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #04AA6D;
+  cursor: pointer;
+}
+.container .controls .control2 form, .container .controls .control3 form {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+.container .controls .control2 form label, .container .controls .control3 form label {
+  font-family: "Source Code Pro", monospace;
+  font-weight: 300;
+  color: #E4F9E1;
+  font-size: clamp(1.266rem, 2vw, 1.953rem);
+}
+.container .result {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.container .result .passwordHolder {
+  display: flex;
+  gap: 1rem;
+}
+.container .result .passwordHolder #password {
+  font-family: "Source Code Pro", monospace;
+  color: #E4F9E1;
+  font-size: clamp(1.266rem, 2vw, 1.953rem);
+  align-self: center;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #88e9a5;
+}
+.container .result .buttonHolder {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+.container .result .buttonHolder button {
+  width: 40px;
+  background: none;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transform: scale(100%);
+  transition: 0.1s ease-in-out;
+}
+.container .result .buttonHolder button img {
+  width: 100%;
+}
+.container .result .buttonHolder button:hover {
+  transform: scale(102%);
+  transition: 0.1s ease-in-out;
+}
+.container #strength {
+  width: 100%;
+  position: relative;
+  z-index: 5;
+  padding: 0.5rem 0.8rem;
+  border-radius: 2px;
+  border: 1px solid #E4F9E1;
+  background-image: linear-gradient(to right, rgba(54, 68, 50, 0.6588235294), rgba(38, 67, 35, 0.6588235294));
+}
+.container #strength h3 {
+  font-family: "Source Code Pro", monospace;
+  font-weight: 300;
+  color: #E4F9E1;
+  font-size: 0.8rem;
+  text-align: center;
+  position: relative;
+  z-index: 5;
+}
+.container #strength::after {
+  content: "";
+  width: 0%;
+  height: 100%;
+  position: absolute;
+  display: block;
+  z-index: 4;
+  top: 0;
+  left: 0;
+  transition: 0.5s ease-in-out;
+}
+.container #strength.Usable::after {
+  width: 30%;
+  background-color: #7b5151;
+}
+.container #strength.Ideal::after {
+  width: 65%;
+  background-color: #676c2e;
+}
+.container #strength.Strong::after {
+  width: 100%;
+  background-color: #026e1b;
+}
+
+@media only screen and (max-width: 868px) and (min-width: 481px) {
+  .App {
+    background-size: 250px;
+  }
+  .alertHolder div {
+    padding: 2rem 1rem;
+    width: 325px;
+  }
+  .alertHolder div p {
+    font-size: 1.25rem;
+  }
+  .container {
+    padding: 50px;
+  }
+  .container > p {
+    font-size: 1rem;
+  }
+  .container header h1 {
+    font-size: clamp(2.441rem, 6.4vw, 3.052rem);
+  }
+  .container .controls {
+    width: 100%;
+    align-self: center;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  .container .controls .control1, .container .controls .control2, .container .controls .control3 {
+    width: 100%;
+  }
+  .container .controls .control1 .length h3 {
+    font-size: clamp(1rem, 2.5vw, 1.266rem);
+  }
+  .container .controls .control2 form label, .container .controls .control3 form label {
+    font-size: clamp(1rem, 2.5vw, 1.266rem);
+  }
+  .container .result .passwordHolder {
+    gap: 0.5rem;
+  }
+  .container .result .passwordHolder h3 {
+    max-width: 15ch;
+    font-size: clamp(1rem, 2.5vw, 1.266rem);
+  }
+  .container .result .buttonHolder {
+    gap: 1rem;
+  }
+  .container .result .buttonHolder button {
+    width: 30px;
+  }
+}
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+  .App {
+    background-size: 150px;
+  }
+  .alertHolder div {
+    padding: 2rem 1rem;
+    width: 325px;
+  }
+  .alertHolder div p {
+    font-size: 1.25rem;
+  }
+  .container {
+    padding: 20px;
+  }
+  .container > p {
+    font-size: 0.8rem;
+  }
+  .container header h1 {
+    font-size: clamp(1.25rem, 8vw, 1.953rem);
+  }
+  .container .controls {
+    width: 100%;
+    align-self: center;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  .container .controls .control1, .container .controls .control2, .container .controls .control3 {
+    width: 100%;
+  }
+  .container .controls .control1 .length h3 {
+    font-size: clamp(1rem, 2.5vw, 1.266rem);
+  }
+  .container .controls .control2 form label, .container .controls .control3 form label {
+    font-size: clamp(1rem, 2.5vw, 1.266rem);
+  }
+  .container .result {
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+  }
+  .container .result .passwordHolder {
+    align-self: center;
+  }
+  .container .result .passwordHolder h3 {
+    max-width: auto;
+    font-size: clamp(1rem, 2.5vw, 1.266rem);
+  }
+  .container .result .buttonHolder {
+    gap: 2rem;
+  }
+  .container .result .buttonHolder button {
+    width: 40px;
+  }
+}/*# sourceMappingURL=app.css.map */

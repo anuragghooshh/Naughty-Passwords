@@ -1,0 +1,432 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;500&display=swap');
+$light : #E4F9E1;
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#myVideo{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 100;
+    mix-blend-mode: color-dodge;
+    opacity: 40%;
+    object-fit: cover;
+    pointer-events: none;
+}
+#crt{
+    position: fixed;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    mix-blend-mode: color-dodge;
+    pointer-events: none;
+    opacity: 30%;
+}
+.App{
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    display: flex;
+    justify-content: center;
+    background: url('./resources/greenbg.png');
+    background-size: 300px;
+    background-position: center;
+
+}
+.alertHolder{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    position: fixed;
+    z-index: 99;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    background-color: rgba(0, 0, 0, 0);
+
+    div{
+        width: 450px;
+        border: 01px solid $light;
+        border-radius: 2px;
+        padding: 2rem 2rem;
+        background-image: linear-gradient(to right,#364432a8,#264323a8);
+        backdrop-filter: blur(8px);
+        height: fit-content;
+        opacity: 0;
+        transform: scale(95%);
+        transition: 0.2s ease;
+    
+        p{
+            font-family: 'Source Code Pro', monospace;
+            font-weight: 300;
+            color: $light;
+            font-size: 1.563rem;
+            text-align: center;
+        }
+    }
+}
+
+.alertHolder.active{
+    pointer-events: all;
+    background-color: rgba(0, 0, 0, 0.258);
+
+    div{
+        opacity: 1;
+        transform: scale(100%);
+        transition: 0.2s ease;
+    }  
+}
+
+.container{
+    height: 100%;
+    padding: 20px 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    // border: 1px solid white;
+
+    >p{
+        position: relative;
+        z-index: 99;
+        top: 20px;
+        font-family: 'Source Code Pro', monospace;
+        font-weight: 300;
+        color: $light;
+        // background-color: palevioletred;
+    }
+
+    header{
+        h1{
+            font-family: 'Source Code Pro', monospace;
+            font-weight: 300;
+            color: $light;
+            font-size: 3.052rem;
+        }
+    }
+    .controls{
+        display: flex;
+        justify-content: space-between;
+        gap: 2rem;
+        padding: 2rem;
+        border: 1px solid $light;
+        border-radius: 2px;
+        background-image: linear-gradient(to right,#364432a8,#264323a8);
+        backdrop-filter: blur(5px);
+
+        .control1,.control2,.control3{
+            width: clamp(165px,16vw,250px);
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            justify-content: space-between;
+
+            input[type="checkbox"] {
+                align-self: center;
+                justify-self: center;
+                appearance: none;
+                background: #284125bb;
+                margin: 0;
+                font: inherit;
+                color: currentColor;
+                width: 1.15em;
+                height: 1.15em;
+                border: 1px solid $light;
+                border-radius: 2px;
+                display: grid;
+                place-content: center;
+            }
+
+            input[type="checkbox"]::before {
+                content: "";
+                width: 0.65em;
+                height: 0.65em;
+                transform: scale(0);
+                transition: 120ms transform ease-in-out;
+                background-color: $light;
+              }
+              
+            input[type="checkbox"]:checked::before {
+                transform: scale(1);
+            }
+        }
+        .control1{
+            justify-content: space-evenly;
+
+            .length{
+                display: flex;
+                justify-content: space-between;
+                gap: 2rem;
+
+                h3{
+                    font-family: 'Source Code Pro', monospace;
+                    font-weight: 300;
+                    color: $light;
+                    font-size: clamp(1.266rem,2vw,1.953rem);
+                    align-self: center;
+                    // font-size: 2vw;
+                }
+                input{
+                    width: clamp(5rem,40%,4rem);
+                    outline: none;
+                    border: 1px solid $light;
+                    border-radius: 3px;
+                    background: #284125bb;
+                    padding: 0.5rem 0.7rem;
+                    font-family: 'Source Code Pro', monospace;
+                    font-weight: 300;
+                    color: $light;
+                }
+            }
+            #lenSlider {
+                appearance: none;
+                width: 100%;
+                height: 2px;
+                position: relative;
+                background: $light;
+                outline: none;
+                border-radius: 2px;
+                -webkit-transition: .2s;
+                transition: opacity .2s;
+            }
+            
+            #lenSlider::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 25px;
+                height: 25px;
+                border-radius: 100%;
+                background: $light;
+                cursor: pointer;
+            }
+            
+            #lenSlider::-moz-range-thumb {
+                width: 25px;
+                height: 25px;
+                background: #04AA6D;
+                cursor: pointer;
+            }
+        }
+        .control2,.control3{
+            form{
+                display: flex;
+                gap: 1rem;
+                justify-content: space-between;
+                
+                label{
+                    font-family: 'Source Code Pro', monospace;
+                    font-weight: 300;
+                    color: $light;
+                    font-size: clamp(1.266rem,2vw,1.953rem);
+                }
+            }
+        }
+    }
+
+    .result{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        .passwordHolder{
+            display: flex;
+            gap: 2rem;
+
+            h3{
+                font-family: 'Source Code Pro', monospace;
+                font-weight: 300;
+                color: $light;
+                font-size: clamp(1.266rem,2vw,1.953rem);
+                align-self: center;
+            }
+            #password{
+                font-weight: 500;
+            }
+        }
+
+        .buttonHolder{
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+
+            button{
+                width: 40px;
+                background: none;
+                outline: none;
+                border: none;
+                cursor: pointer;
+                transform: scale(100%);
+                transition: 0.1s ease-in-out;
+    
+                img{
+                    width: 100%
+                }
+            }
+            button:hover{
+                transform: scale(102%);
+                transition: 0.1s ease-in-out;
+            }
+        } 
+    }
+}
+
+// Tablet
+@media only screen and (max-width:868px) and (min-width:481px){
+    .App{
+        background-size: 250px;
+    }
+    .alertHolder{
+        div{
+            padding: 2rem 1rem;
+            width: 325px;
+            p{
+                font-size: 1.25rem;
+            }
+        }
+    }
+    .container{
+        padding: 50px;
+
+        >p{
+            font-size: 1rem;
+        }
+
+        header{
+            h1{
+                font-size: clamp(2.441rem,6.4vw,3.052rem);
+            }
+        }
+
+        .controls{
+            width: 100%;
+            align-self: center;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 2rem;
+
+            .control1,.control2,.control3{
+                width: 100%;
+            }
+
+            .control1{
+                .length{
+                    h3{
+                        font-size: clamp(1rem,2.5vw,1.266rem);
+                    }
+                }
+
+            }   
+            
+            .control2,.control3{
+                form{
+
+                    label{
+                        font-size: clamp(1rem,2.5vw,1.266rem);
+                    }
+                }
+            }
+            
+        }
+        .result{
+            .passwordHolder{
+                gap: 0.5rem;
+
+                h3{
+                    font-size: clamp(1rem,2.5vw,1.266rem);
+                }
+            }
+            .buttonHolder{
+                gap: 1rem;
+
+                button{
+                    width: 30px;
+                }
+            }
+        }
+    }
+}
+
+// Smartphone
+@media only screen and (min-width: 320px) and (max-width: 480px){
+    .App{
+        background-size: 150px;
+    }
+    .alertHolder{
+        div{
+            padding: 2rem 1rem;
+            width: 325px;
+            p{
+                font-size: 1.25rem;
+            }
+        }
+    }
+    .container{
+        padding: 20px;
+
+        >p{
+            font-size: 0.8rem;
+        }
+
+        header{
+            h1{
+                font-size: clamp(1.25rem,8vw,1.953rem);
+            }
+        }
+
+        .controls{
+            width: 100%;
+            align-self: center;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 2rem;
+
+            .control1,.control2,.control3{
+                width: 100%;
+            }
+
+            .control1{
+                .length{
+                    h3{
+                        font-size: clamp(1rem,2.5vw,1.266rem);
+                    }
+                }
+
+            }   
+            
+            .control2,.control3{
+                form{
+
+                    label{
+                        font-size: clamp(1rem,2.5vw,1.266rem);
+                    }
+                }
+            }
+            
+        }
+        .result{
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+
+            .passwordHolder{
+                gap: 0.5rem;
+
+                h3{
+                    font-size: clamp(1rem,2.5vw,1.266rem);
+                }
+            }
+            .buttonHolder{
+                gap: 2rem;
+
+                button{
+                    width: 40px;
+                }
+            }
+        }
+    }
+}
